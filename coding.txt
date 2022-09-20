@@ -1,0 +1,261 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+#define MAX 100
+typedef struct {
+	int code;
+	char nom[20];
+	int qauntite;
+	float prix;
+	float prix_ttc;
+}produit;
+
+ 
+produit tableau [MAX];
+int nbr_produit =0;
+
+
+void ajouter (){
+	printf("entre le code de produit \n");
+	scanf("%d",&tableau[nbr_produit].code);
+
+	printf("entre le nom de produit \n");
+	scanf("%s",&tableau[nbr_produit].nom);
+
+	printf("entre la quantite de produit \n ");
+	scanf("%d",&tableau[nbr_produit].qauntite);
+
+	printf("entre le prix de produit \n ");
+	scanf("%f",&tableau[nbr_produit].prix);
+
+	tableau[nbr_produit].prix_ttc =tableau[nbr_produit].prix + (tableau[nbr_produit].prix*0.15);
+	printf("prix ttc :%f \n",tableau[nbr_produit].prix_ttc);
+
+	nbr_produit++;
+}
+
+
+   void ajouter_plusieur_produit(){
+ 	int i,n;
+ 	printf("entre le nombre  de les produit \n");
+ 	scanf("%d",&n);
+ 	for(i=0;i<n;i++){
+ 		printf("\n Produit suivant :    \n");
+ 	 ajouter ();
+ }}
+
+
+
+   void afficher(){
+ 	int i;
+ 	for(i=0;i<nbr_produit;i++){
+ 		printf("\n");
+ 		printf("***affichage de les produit***\n");
+ 		printf("\n autre produit  : \n");
+ 		printf("\n");
+ 		printf(" LE NOM           :%s \n",tableau[i].nom);
+ 		printf("LE PRIX           :%f \n",tableau[i].prix);
+ 		printf(" LE PRIX TTC      :%f \n",tableau[i].prix_ttc);
+ 		printf("la quantite       : %d\n",tableau[i].qauntite);
+	 }}
+
+
+     void tri_alphabet(){
+   	int i,j;
+   	for(i=0;i<nbr_produit;i++){
+   		for (j=i+1;j<nbr_produit;j++){
+   			if(strcmp(tableau[i].nom,tableau[j].nom)>0){
+   			produit temp=tableau[i];
+   			tableau[i]=tableau[j];
+   			tableau[j]=temp;
+		   } }}
+		   printf("suivant");
+		   afficher();
+		   }
+
+  
+  
+     void tri_prix(){
+   	int i,j;
+   	for(i=0;i<nbr_produit;i++){
+   		for (j=i+1;j<nbr_produit;j++){
+   			if (tableau[i].prix<tableau[j].prix){
+   				produit zone=tableau[i];
+   				tableau[i]=tableau[j];
+   				tableau[j]=zone;
+			   }}}
+			    afficher();
+			}
+
+
+	void acheter(){
+	int i,code,quantite;
+	printf("entre le code de produit");
+	scanf("%d",&code);
+
+	printf("entre la quantite de produit");
+	scanf("%d",&quantite);
+		for(i=0;i<nbr_produit;i++){
+			if(code== tableau[i].code){
+				if(tableau[i].qauntite>=quantite){
+					tableau[i].qauntite -=quantite;	
+					   printf("****Opération terminée*****\n");		
+	  }
+	  }
+      }
+	  }
+		
+		
+		
+
+void recherche_code(){
+ 	int i,code;
+ 	printf("entre le code de produit");
+ 	scanf("%d",&code);
+ 	for(i=0;i<nbr_produit;i++){
+ 	if(tableau[i].code==code){
+ 		printf("NOM         : %s\n",tableau[i].nom);
+ 		printf("CODE        : %d\n",tableau[i].code);
+ 		printf("QUANTITE    : %d\n",tableau[i].qauntite);
+ 		printf(" PRIX       :%f\n",tableau[i].prix);
+	 } 
+	 }}
+
+
+	 void recherche_Quantite(){
+ 	int i,Quantite;
+ 	printf("entre la quantite de produit");
+ 	scanf("%d",&Quantite);
+ 	for(i=0;i<nbr_produit;i++){
+ 	if(tableau[i].qauntite==Quantite){
+ 		printf("NOM          : %s\n",tableau[i].nom);
+ 		printf("CODE         : %d\n",tableau[i].code);
+ 		printf("QUANTITE     :%d\n",tableau[i].qauntite);
+ 		printf("PRIX         :%f\n",tableau[i].prix);
+ 	}}}
+
+
+
+
+    void etat_stock(){
+   	int i;
+   	for(i=0;i<nbr_produit;i++){
+   	if(tableau[i].qauntite<=3){
+   		printf("\n*************************************************\n");
+   		printf("nom: %s\n",tableau[i].nom);
+   		printf("quantite %d\n",tableau[i].qauntite);
+   		printf("code: %d\n",tableau[i].code);
+   		printf("prix %f\n",tableau[i].prix);
+   		printf("\n****************************************************\n");
+   	}
+   		
+   	}
+		 }
+		
+	
+	
+		
+	void allimenter_stock(){
+	int i,code,quantite;
+	printf("entre le code de produit");
+	scanf("%d",&code);
+	printf("entre la quantite de produit");
+	scanf("%d",&quantite);
+	for(i=0;i<nbr_produit;i++){
+		if(tableau[i].code==code){
+			tableau[i].qauntite += quantite;
+			printf("\nOPERATION TERMINEE\n");
+	}
+	break;
+    }}
+    
+    
+    
+     void suprimer(){
+  	int i,j,code ;
+  	printf("entre le code pour suprimer le produit");
+  	scanf("%d",&code);
+  	for(i=0;i<nbr_produit;i++){
+  	if(tableau[i].code==code){
+  	for(j=i;j<nbr_produit-1;j++){
+  		tableau[j]=tableau[j+1];
+			  }
+		 nbr_produit--;
+		 break;
+        }}
+		}
+
+
+
+    void menu(){
+    printf("\n");
+    printf("\n");
+    printf("*******************MENU********************");
+    printf("*            \n                                 *");
+	printf("\n1)ajouter un nouveau produit \n");
+	printf("2)ajouter plusier produit\n");
+	printf("3)afficher\n ");
+	printf("4)tri par alphabet\n");
+	printf("5)tri par prix\n");
+	printf("6)acheter un produit\n");
+	printf("7)recherche par code\n ");
+    printf("8) recherche la quantite de les produit\n");
+	printf("9)etat de stock\n");
+	printf("10)Alliment de stock\n");
+	printf("11)suprrimer\n");
+   printf("\n*****************************************\n");
+}
+
+
+int main() {
+	
+	printf("\n");
+	printf("*********************** BIENVENUE**PHARMACIE************************\n");
+	int choix ;
+	start:
+	menu();
+	printf("\n entre votre choix :\n");
+	scanf("%d",&choix);
+	switch(choix){
+		case 1:
+			 ajouter ();
+			 printf("***************felicitation********************\n");
+			 goto start;
+	    case 2:
+	    	ajouter_plusieur_produit();
+	    	 printf("***************felicitation*********************\n");
+	    	goto start;
+	    case 3:
+	    	 afficher();
+	    	 goto start;
+	    case 4:
+	    	tri_alphabet();
+	    printf("***************felicitation********************\n");	
+	    	goto start;
+	    case 5:
+	    	tri_prix();
+	    	goto start;
+	    case 6:
+	    	acheter();
+	    	goto start;
+	    case 7:
+	    	recherche_code();
+	    	goto start;
+	    case 8:
+	    	recherche_Quantite();
+	    	goto start;
+	    case 9:
+	    	etat_stock();
+	    	goto start;
+	    case 10:
+	    	allimenter_stock();
+	    	goto start;
+	    case 11:
+	    	suprimer();
+			goto start;
+	}
+
+	return 0;
+}
